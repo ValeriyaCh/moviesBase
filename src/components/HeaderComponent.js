@@ -39,6 +39,9 @@ class Header extends Component {
                             <NavItem>
                                 <NavLink className="nav-link"  to='/home'><span className="fa fa-home fa-lg"></span> Home</NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link"  to='/allmovies'><span className="fa fa-film fa-lg"></span> Movies</NavLink>
+                            </NavItem>
                             </Nav>
                         </Collapse>
                     <Button className="fa fa-sign-in btn-danger " onClick={this.toggleLog}> Login </Button>

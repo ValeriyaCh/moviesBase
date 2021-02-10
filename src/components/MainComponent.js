@@ -5,6 +5,7 @@ import Footer from './FooterComponent';
 import { MOVIES } from '../shared/films';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import MovieDetail from './MovieDetailComponent';
+import AllMovies from './AllMoviesComponent';
 
 class Main extends Component {
 
@@ -32,7 +33,8 @@ class Main extends Component {
         <div className="backColor">
         <Switch>
               <Route exact path='/home' component={() => <Home movies={this.state.movies.filter((movie) => movie.like === true).slice(0, 3)} onClick={(movieId) => this.onMovieSelect(movieId)}/>} />
-              <Route path='/home/:selectedMovieId' component={()=> <MovieDetail movie={this.state.movies.filter((movie) => movie.id === parseInt(this.state.selectedMovieId,10))[0]} />} />
+              <Route path='/allmovies/:selectedMovieId' component={()=> <MovieDetail movie={this.state.movies.filter((movie) => movie.id === parseInt(this.state.selectedMovieId,10))[0]} />} />
+              <Route exact path='/allmovies' component={()=> <AllMovies movies={this.state.movies} onClick={(movieId) => this.onMovieSelect(movieId)}/>} />
               <Redirect exact to="/home" />
         </Switch>
         </div>

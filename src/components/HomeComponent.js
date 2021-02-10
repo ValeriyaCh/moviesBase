@@ -1,13 +1,12 @@
 import React from 'react';
-import { Card, CardImg, CardImgOverlay, CardBody,
-    CardTitle} from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardBody, CardTitle} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function RenderCard({item, onClickFunc}) {
     return(
         <Card color="danger" onClick={() => onClickFunc(item.id)}> 
         <Link to={`/home/${item.id}`} >
-            <CardImg src={item.image} top width="100%" alt={item.name} />
+            <CardImg src={item.image} className="cardItem" alt={item.name} />
         </Link>
         </Card>
     );

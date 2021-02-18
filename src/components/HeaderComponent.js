@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Button, Modal, ModalHeader, ModalBody,
-    Form, FormGroup, Input, Label } from 'reactstrap';
+    Form, FormGroup, Input, Label, Row, Col } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import { Control, LocalForm, Errors } from 'react-redux-form';
+
+const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
+const required = (val) => val && val.length;
 
 class Header extends Component {
     constructor(props) {
@@ -14,7 +18,15 @@ class Header extends Component {
         };
         this.toggleLog = this.toggleLog.bind(this);
         this.toggleNav = this.toggleNav.bind(this);
-      }
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+    }
+
+    handleSubmit(values) {
+        console.log('Current State is: ' + JSON.stringify(values));
+        alert('Current State is: ' + JSON.stringify(values));
+        // event.preventDefault();
+    }
 
       toggleLog() {
         this.setState({
@@ -42,6 +54,9 @@ class Header extends Component {
                             <NavItem>
                                 <NavLink className="nav-link"  to='/allmovies'><span className="fa fa-film fa-lg"></span> Movies</NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to='/contact'><span className="fa fa-address-card fa-lg"></span> Contact </NavLink>
+                            </NavItem>
                             </Nav>
                         </Collapse>
                     <Button className="fa fa-sign-in btn-danger " onClick={this.toggleLog}> Login </Button>
@@ -50,26 +65,51 @@ class Header extends Component {
         <Modal isOpen={this.state.isLogOpen} toggle={this.toggleLog}>
                     <ModalHeader toggle={this.toggleLog}>Login</ModalHeader>
                     <ModalBody>
-                    <Form>
-                            <FormGroup>
-                                <Label htmlFor="username">Username</Label>
-                                <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="password">Password</Label>
-                                <Input type="password" id="password" name="password"
-                                    innerRef={(input) => this.password = input}  />
-                            </FormGroup>
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" name="remember"
-                                    innerRef={(input) => this.remember = input}  />
-                                    Remember me
-                                </Label>
-                            </FormGroup>
-                            <Button type="submit" value="submit" color="primary">Login</Button>
-                        </Form>
+                    <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                        <Row className="form-group">
+                                    <Label htmlFor="email" md={2}>Email</Label>
+                                    <Col md={10}>
+                                        <Control.text model=".email" id="email" name="email"
+                                            placeholder="Email"
+                                            className="form-control"
+                                            validators={{
+                                                required, validEmail
+                                            }}
+                                            />
+                                        <Errors
+                                            className="text-danger"
+                                            model=".email"
+                                            show="touched"
+                                            messages={{
+                                                required: 'Required',
+                                                validEmail: 'Invalid Email Address'
+                                            }}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row className="form-group">
+                                    <Label htmlFor="password" md={2}>Password</Label>
+                                    <Col md={10}>
+                                        <Control.text model=".password" id="password" name="password"
+                                            placeholder="Password"
+                                            className="form-control"
+                                            />
+                                    </Col>
+                                </Row>
+                                <Row className="form-group">
+                                    <Col md={{size: 6, offset: 2}}>
+                                        <div className="form-check">
+                                            <Label check>
+                                                <Control.checkbox model=".agree" name="agree"
+                                                    className="form-check-input"
+                                                    /> {' '}
+                                                    <strong>Remember me</strong>
+                                            </Label>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            <Button type="submit" value="submit" color="primary">Submit</Button>
+                        </LocalForm>
                     </ModalBody>
                 </Modal>
        </div>

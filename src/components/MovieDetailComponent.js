@@ -4,10 +4,11 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { Link } from 'react-router-dom';
 
 
 
-function RenderCard({item}) {
+function RenderCard({item, changeLike}) {
     const labelItem = (item.like) ? "Added to favourite" : "Add to favourite";
     
     return(
@@ -21,7 +22,8 @@ function RenderCard({item}) {
                 <h2>{item.name}</h2>
                 <p>{item.year} year, {item.country}</p>
                 <p>{item.description}</p>
-                <p><FormControlLabel control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />}  checked={item.like} name={item.like} />}
+                <p><FormControlLabel control={<Checkbox onClick={() => changeLike(item.id, item.like)} 
+                                     icon={<FavoriteBorder /> } checkedIcon={<Favorite />}  checked={item.like} />}
                 label={labelItem} /> </p>
                  <p><Button> Watch again </Button></p>
             </div>
@@ -30,10 +32,16 @@ function RenderCard({item}) {
 }
 
 function MovieDetail(props){
- return(
-    <div className="container">
-        <RenderCard item={props.movie} />
-    </div>
- );
+    if (props.movie!=null)
+        return(
+            <div className="container">
+                <RenderCard item={props.movie} changeLike={props.changeLike} />
+            </div>
+        );
+    else 
+        return(
+            <div></div>
+        );
+
 }
 export default MovieDetail;

@@ -10,12 +10,12 @@ const options = [
     {name: '2007', value: '2007'}
 ]
 
-function RenderCard({item, onClickFunc}) {
+function RenderCard({item}) {
     return(
-        <Card className="mb-5" color="danger" onClick={() => onClickFunc(item.id)}> 
-        <Link to={`/allmovies/${item.id}`} >
-            <CardImg src={item.image} className="cardItem" alt={item.name} />
-        </Link>
+        <Card className="mb-5" color="danger"> 
+            <Link to={`/allmovies/${item.id}`} >
+                <CardImg src={item.image} className="cardItem" alt={item.name} />
+            </Link>
         </Card>
     );
 }

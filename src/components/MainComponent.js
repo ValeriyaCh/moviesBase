@@ -7,7 +7,13 @@ import AllMovies from './AllMoviesComponent';
 import Contact from './ContactComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { changeLike} from '../redux/ActionCreators';
 
+const mapDispatchToProps = dispatch => ({
+  
+  changeLike: (movieId, like) => dispatch(changeLike(movieId, like))
+
+});
 
 const mapStateToProps = state => {
   return {
@@ -25,7 +31,8 @@ class Main extends Component {
 
     const MovieWithId = ({match}) => {
       return(
-          <MovieDetail dish={this.props.movies.filter((movie) => movie.id === parseInt(match.params.movieId,10))[0]} 
+          <MovieDetail movie={this.props.movies.filter((movie) => movie.id === parseInt(match.params.movieId,10))[0]} 
+                       changeLike = {this.props.changeLike}
            />
       );
     };
@@ -36,7 +43,7 @@ class Main extends Component {
         <div className="backColor">
         <Switch>
               <Route exact path='/home' component={() => <Home movies={this.props.movies.filter((movie) => movie.like === true).slice(0, 3)} />} />
-              <Route path='/allmovies/:selectedMovieId' component={MovieWithId} />
+              <Route path='/allmovies/:movieId' component={MovieWithId} />
               <Route exact path='/allmovies' component={()=> <AllMovies movies={this.props.movies}/>} />
               <Route exact path='/contact' component={Contact} />
               <Redirect exact to="/home" />
@@ -48,4 +55,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

@@ -93,7 +93,18 @@ class Header extends Component {
                                         <Control.text model=".password" id="password" name="password"
                                             placeholder="Password"
                                             className="form-control"
+                                            validators={{
+                                                required
+                                            }}
                                             />
+                                        <Errors
+                                            className="text-danger"
+                                            model=".password"
+                                            show="touched"
+                                            messages={{
+                                                required: 'Required',
+                                            }}
+                                        />
                                     </Col>
                                 </Row>
                                 <Row className="form-group">

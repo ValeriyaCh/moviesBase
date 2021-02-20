@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Button, Modal, ModalHeader, ModalBody,
-    Form, FormGroup, Input, Label, Row, Col } from 'reactstrap';
+         Label, Row, Col } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 

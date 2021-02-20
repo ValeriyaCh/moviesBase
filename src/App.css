@@ -35,10 +35,19 @@ h1 {
     color:rgb(255, 60, 60);
 }
 
+.lightColor {
+    color:floralwhite;
+}
+
 .cardItem {
     height: 400px;
     width: 250px;
   }
+
+.fa-spinner {
+    color: rgb(185, 239, 255) !important;
+    margin:10px;
+}
 
 /**
  * Main wrapper

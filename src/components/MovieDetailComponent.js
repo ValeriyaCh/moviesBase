@@ -5,6 +5,7 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 
 
@@ -32,7 +33,25 @@ function RenderCard({item, changeLike}) {
 }
 
 function MovieDetail(props){
-    if (props.movie!=null)
+    if (props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (props.movie!=null)
         return(
             <div className="container">
                 <RenderCard item={props.movie} changeLike={props.changeLike} />

@@ -6,6 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 
 
@@ -16,7 +17,7 @@ function RenderCard({item, changeLike}) {
         <div className="row row-content">
             <div className="col-12 col-md-3 m-1">
                 <Card color='danger' key={item.id}> 
-                    <CardImg width="100%" src={item.image} alt={item.name} />
+                    <CardImg width="100%" src={baseUrl + item.image} alt={item.name} />
                 </Card>
             </div>
             <div className="col-12 col-md m-1">

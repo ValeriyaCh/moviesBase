@@ -3,6 +3,7 @@ import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Button, Mod
          Label, Row, Col } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { baseUrl } from '../shared/baseUrl';
 
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 const required = (val) => val && val.length;
@@ -45,7 +46,7 @@ class Header extends Component {
             <Navbar dark expand="md">
                 <div className="container">
                     <NavbarToggler onClick={this.toggleNav} />
-                    <NavbarBrand className="mr-auto" href="/"><img src='../imgs/logo.jpg' height="30" width="31" alt='MBase' />  MoviesBase</NavbarBrand>
+                    <NavbarBrand className="mr-auto" href="/"><img src={baseUrl + '../imgs/logo.jpg'} height="30" width="31" alt='MBase' />  MoviesBase</NavbarBrand>
                     <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                             <NavItem>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import SearchInput, {createFilter} from 'react-search-input';
 import SelectSearch from 'react-select-search';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 
 const options = [
@@ -15,7 +16,7 @@ function RenderCard({item}) {
     return(
         <Card className="mb-5" color="danger"> 
             <Link to={`/allmovies/${item.id}`} >
-                <CardImg src={item.image} className="cardItem" alt={item.name} />
+                <CardImg src={baseUrl + item.image} className="cardItem" alt={item.name} />
             </Link>
         </Card>
     );

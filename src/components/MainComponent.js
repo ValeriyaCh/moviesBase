@@ -32,6 +32,7 @@ class Main extends Component {
   }
   componentDidMount() {
     this.props.fetchMovies();
+    document.title = 'MoviesBase';
   }
 
   render() {
